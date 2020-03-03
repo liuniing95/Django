@@ -1,0 +1,97 @@
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+ <script src=" https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <title>Title</title>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div style="background: #81c2d6;color: #ffffff; min-height: 100px;">
+                <div class="col-9">
+                    <form method="get">
+                        <input type="text" class="form-control" name="city" placeholder="Please enter your city">
+                        <button type="submit">Enter</button>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container" style="border: 2px;">
+    <div class="row">
+        <div class="col-12"><h1>Weather in {{ cityname }}</h1></div>
+        <div class="col-3" style="border: #81c2d6">
+            <img class="img-responsive center-block" src="http://openweathermap.org/img/w/{{ icon }}.png" style="height: 80px;">
+        </div>
+        <div class="col-9">
+            <table class="table">
+  <tbody>
+    <tr>
+
+      <td>Description</td>
+      <td>{{ description }}</td>
+    </tr>
+    <tr>
+
+      <td>Feels like</td>
+      <td>{{ temp }}° C </td>
+    </tr>
+    <tr>
+
+      <td>Min Temp</td>
+      <td>{{ temp_min }}° C </td>
+    </tr>
+    <tr>
+        <td>Max Temp</td>
+        <td>{{ temp_max }}° C </td>
+    </tr>
+    <tr>
+        <td>Humidity</td>
+        <td>{{ humidity }}%</td>
+    </tr>
+    <tr>
+        <td>Sunrise time</td>
+        <td>{{ sunrise }} (UTC)</td>
+    </tr>
+    <tr>
+        <td>Sunset time</td>
+        <td>{{ sunset }} (UTC)</td>
+    </tr>
+  </tbody>
+</table>
+        </div>
+    </div>
+    <canvas id="myChart" width="100" height="50"></canvas>
+<script>
+     var Datelist = {{ Datelist|safe }};
+     var Templist = {{ Templist|safe }};
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'line',
+
+    // The data for our dataset
+    data: {
+        labels: Datelist,
+        datasets: [{
+            label: "Temperature",
+            borderColor: 'rgb(255, 99, 132)',
+            data: Templist,
+        }]
+    },
+
+    // Configuration options go here
+    options: {}
+}
+);
+</script>
+</div>
+
+</body>
+</html>
